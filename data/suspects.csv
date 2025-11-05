@@ -1,0 +1,8 @@
+ProviderName,EventId,Count,Meaning
+disk,153,565,Storport: IO retries — storage is timing out (cable/port/driver).
+Microsoft-Windows-WHEA-Logger,3,30,
+Microsoft-Windows-Kernel-Power,41,28,"System rebooted without clean shutdown (power loss, crash, hang)."
+Microsoft-Windows-WHEA-Logger,1,21,WHEA: Machine Check Exception reported by CPU.
+Microsoft-Windows-Servicing,3,1,
+Microsoft-Windows-Servicing,4,1,
+Microsoft-Windows-Servicing,2,1,
