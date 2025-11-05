@@ -1,0 +1,6 @@
+{
+  "report_dir": "C:\\Users\\Hugh\\Qsync\\Coding projects\\BSOD Analyzer\\BSOD_Report",
+  "lookback_days": 3,
+  "window_min": 15,
+  "poll_seconds": 10
+}
