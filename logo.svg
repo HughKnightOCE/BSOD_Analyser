@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="512" height="512" xmlns="http://www.w3.org/2000/svg">
+    <!-- Dark grey gradient background -->
+    <defs>
+        <linearGradient id="bgGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" style="stop-color:#2a2a2d;stop-opacity:1" />
+            <stop offset="100%" style="stop-color:#1a1a1d;stop-opacity:1" />
+        </linearGradient>
+    </defs>
+    
+    <!-- Background -->
+    <rect width="512" height="512" fill="url(#bgGrad)"/>
+    
+    <!-- White circle (center) -->
+    <circle cx="256" cy="256" r="176" fill="#f0f0f0" stroke="#c8c8c8" stroke-width="2"/>
+    
+    <!-- Purple accent circle (top right) -->
+    <circle cx="420" cy="85" r="55" fill="#7c3aed" opacity="0.8" stroke="#7c3aed" stroke-width="2"/>
+    
+    <!-- "BA" Text -->
+    <text x="256" y="310" font-family="Segoe UI, Arial, sans-serif" font-size="140" font-weight="bold" 
+          text-anchor="middle" fill="#2a2a2d">BA</text>
+    
+    <!-- Purple underline -->
+    <rect x="150" y="340" width="212" height="10" fill="#7c3aed" rx="5"/>
+    
+    <!-- "ANALYZER" text -->
+    <text x="256" y="410" font-family="Segoe UI, Arial, sans-serif" font-size="38" font-weight="normal"
+          text-anchor="middle" fill="#c8c8c8">ANALYZER</text>
+</svg>

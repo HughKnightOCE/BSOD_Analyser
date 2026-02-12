@@ -26,9 +26,24 @@ import sys
 from pathlib import Path
 import threading
 import webbrowser
+import json
+from datetime import datetime
 
 import bsod_core
 import driver_updates as dups
+
+# Optional imports with graceful fallbacks
+try:
+    from analytics import CrashAnalytics, CustomRuleEngine
+    has_analytics = True
+except ImportError:
+    has_analytics = False
+
+try:
+    from pdf_export import PDFReportGenerator
+    has_pdf_export = True
+except ImportError:
+    has_pdf_export = False
 
 
 # --------------------- helpers ---------------------
@@ -108,6 +123,138 @@ def tree_sortable(tree: ttk.Treeview):
         tree.heading(col, command=lambda c=col: sort_by(c, False))
 
 # --------------------- actions ---------------------
+def export_to_pdf():
+    if not has_pdf_export:
+        messagebox.showerror("Export Error", "PDF export module not available. PDF reports require 'reportlab' library.")
+        return
+    try:
+        gen = PDFReportGenerator()
+        filename = Path(bsod_core.REPORT_DIR) / f"BSOD_Report_{datetime.now().strftime('%Y%m%d_%H%M%S')}.pdf"
+        gen.generate_report(current_analysis, str(filename))
+        messagebox.showinfo("Export Success", f"PDF report saved to:\n{filename}")
+    except Exception as e:
+        messagebox.showerror("Export Error", f"Failed to export PDF:\n{e}")
+
+def export_to_html():
+    if not has_pdf_export:
+        messagebox.showerror("Export Error", "HTML export module not available.")
+        return
+    try:
+        gen = PDFReportGenerator()
+        filename = Path(bsod_core.REPORT_DIR) / f"BSOD_Report_{datetime.now().strftime('%Y%m%d_%H%M%S')}.html"
+        gen.generate_report(current_analysis, str(filename), format='html')
+        messagebox.showinfo("Export Success", f"HTML report saved to:\n{filename}\n\nOpening in browser...")
+        try:
+            import webbrowser
+            webbrowser.open(f"file:///{filename}")
+        except Exception:
+            pass
+    except Exception as e:
+        messagebox.showerror("Export Error", f"Failed to export HTML:\n{e}")
+
+def populate_analytics():
+    """Populate the Analytics tab with crash analysis data"""
+    if not has_analytics or not current_analysis:
+        analytics_box.config(state="normal")
+        analytics_box.delete("1.0", "end")
+        analytics_box.insert("1.0", "No analytics data available. Run a scan first or install the analytics module.")
+        analytics_box.config(state="disabled")
+        return
+    
+    try:
+        # Create analytics object and analyze
+        crash_data = current_analysis.get("bugchecks", [])
+        suspects = current_analysis.get("suspects", [])
+        sysinfo = current_analysis.get("system", {})
+        
+        analytics = CrashAnalytics()
+        
+        # Add crashes from current analysis
+        for bug in crash_data:
+            analytics.add_crash({
+                'timestamp': bug['TimeLocal'],
+                'code': bug['Code'],
+                'desc': bug['Desc'],
+                'params': bug['Parameters']
+            })
+        
+        # Build analysis report
+        lines = []
+        lines.append("=" * 80)
+        lines.append("CRASH ANALYTICS & INSIGHTS")
+        lines.append("=" * 80)
+        lines.append("")
+        
+        # Crash patterns
+        lines.append("📊 CRASH PATTERNS")
+        lines.append("-" * 80)
+        patterns = analytics.detect_crash_patterns()
+        if patterns.get('top_codes'):
+            lines.append(f"Most common stop codes:")
+            for code, count in patterns['top_codes'][:5]:
+                lines.append(f"  • {code}: {count} occurrences")
+        if patterns.get('peak_hour'):
+            lines.append(f"Peak crash hour: {patterns['peak_hour']}:00")
+        lines.append("")
+        
+        # Driver blame analysis
+        lines.append("🚗 DRIVER BLAME ANALYSIS")
+        lines.append("-" * 80)
+        if suspects:
+            driver_blame = analytics.driver_blame_analysis(suspects)
+            if driver_blame:
+                for driver, blame_data in sorted(driver_blame.items(), key=lambda x: x[1].get('score', 0), reverse=True)[:5]:
+                    score = blame_data.get('score', 0)
+                    severity = "🔴 CRITICAL" if score > 0.8 else "🟠 HIGH" if score > 0.6 else "🟡 MEDIUM" if score > 0.4 else "🟢 LOW"
+                    lines.append(f"{severity} {driver}: {score:.1%} chance of blame")
+            else:
+                lines.append("No driver issues detected from current analysis.")
+        lines.append("")
+        
+        # Temperature analysis
+        lines.append("🌡️  THERMAL ANALYSIS")
+        lines.append("-" * 80)
+        temp_analysis = analytics.temperature_analysis(sysinfo)
+        if temp_analysis.get('warnings'):
+            for warning in temp_analysis['warnings']:
+                lines.append(f"  ⚠️  {warning}")
+        else:
+            lines.append("  ✓ No thermal issues detected.")
+        lines.append("")
+        
+        # Overclocking detection
+        lines.append("⚡ OVERCLOCKING DETECTION")
+        lines.append("-" * 80)
+        oc_analysis = analytics.detect_overclocking()
+        if oc_analysis.get('likely_overclocked'):
+            lines.append("  ⚠️  Overclocking patterns detected!")
+            for indicator in oc_analysis.get('indicators', []):
+                lines.append(f"    • {indicator}")
+        else:
+            lines.append("  ✓ No obvious overclocking detected.")
+        lines.append("")
+        
+        # Recommendations
+        lines.append("💡 RECOMMENDATIONS")
+        lines.append("-" * 80)
+        recommendations = analytics.get_recommendations()
+        if recommendations:
+            for i, rec in enumerate(recommendations, 1):
+                lines.append(f"{i}. {rec}")
+        else:
+            lines.append("No specific recommendations at this time.")
+        lines.append("")
+        lines.append("=" * 80)
+        
+        set_text(analytics_box, "\n".join(lines))
+    except Exception as e:
+        lines = [f"Error analyzing crashes: {e}", ""]
+        lines.append(f"Make sure analytics module is properly installed.")
+        set_text(analytics_box, "\n".join(lines))
+
+# Store current analysis for export/analytics
+current_analysis = None
+
 def run_analysis():
     progress.start(8)
     btn_run.config(state="disabled")
@@ -124,6 +271,9 @@ def run_analysis():
     threading.Thread(target=task, daemon=True).start()
 
 def render_all(summary):
+    global current_analysis
+    current_analysis = summary  # Store for export functions
+    
     # Summary
     lines = []
     lines.append(f"Report saved to:\n  {summary['report_path']}\n")
@@ -200,6 +350,11 @@ def render_all(summary):
     sys_lines.append("\n=== System Snapshot ===")
     sys_lines.append(json_pretty(summary.get("system", {})))
     set_text(sysinfo_box, "\n".join(sys_lines))
+    
+    # Analytics tab - populate with insights
+    if has_analytics:
+        populate_analytics()
+
 
 def json_pretty(obj):
     try:
@@ -404,12 +559,12 @@ except Exception:
 style = ttk.Style(root)
 try: style.theme_use("clam")
 except Exception: pass
-style.configure("TButton", padding=6)
-style.configure("TLabel", font=("Segoe UI", 9))
-style.configure("Header.TFrame", background="#f0f1f5")
-style.configure("Title.TLabel", font=("Segoe UI", 11, "bold"), foreground="#1a1a1a")
-style.configure("Folder.TLabel", font=("Segoe UI", 8), foreground="#555555")
-style.configure("Warn.TLabel", foreground="#d97706", font=("Segoe UI", 9))
+style.configure("TButton", padding=6, font=("Segoe UI", 9))
+style.configure("TLabel", font=("Segoe UI", 9), foreground="#333333")
+style.configure("Header.TFrame", background="#2a2a2d")
+style.configure("Title.TLabel", font=("Segoe UI", 11, "bold"), foreground="#ffffff", background="#2a2a2d")
+style.configure("Folder.TLabel", font=("Segoe UI", 8), foreground="#666666", background="#ffffff")
+style.configure("Warn.TLabel", foreground="#7c3aed", font=("Segoe UI", 9))
 
 # top header bar
 header = ttk.Frame(root, style="Header.TFrame")
@@ -421,7 +576,7 @@ if png.exists():
         logo_small = tk.PhotoImage(file=str(png))
         # keep a ref to avoid GC
         header._logo_small = logo_small
-        tk.Label(header, image=logo_small, bg="#f6f7fb").pack(side="left", padx=(8, 4), pady=6)
+        tk.Label(header, image=logo_small, bg="#2a2a2d").pack(side="left", padx=(8, 4), pady=6)
     except Exception:
         pass
 
@@ -471,6 +626,8 @@ summary_tab = ttk.Frame(nb); nb.add(summary_tab, text="Summary")
 summary_btns = ttk.Frame(summary_tab); summary_btns.pack(fill="x", padx=8, pady=(8, 4))
 ttk.Button(summary_btns, text="Copy Summary", command=copy_summary).pack(side="left", padx=4, pady=2)
 ttk.Button(summary_btns, text="Save Summary", command=save_summary_to_file).pack(side="left", padx=4, pady=2)
+ttk.Button(summary_btns, text="Export to PDF", command=export_to_pdf).pack(side="left", padx=4, pady=2)
+ttk.Button(summary_btns, text="Export to HTML", command=export_to_html).pack(side="left", padx=4, pady=2)
 summary_box = scrolledtext.ScrolledText(summary_tab, wrap="word", font=("Consolas", 10), padx=10, pady=10)
 summary_box.pack(fill="both", expand=True); summary_box.config(state="disabled")
 
@@ -513,6 +670,11 @@ sus_tree.tag_configure("sev_high", background="#fff2cc")
 sus_tree.tag_configure("sev_medium", background="#e6f0ff")
 sus_tree.tag_configure("sev_low", background="#f7f7f7")
 sus_tree.pack(fill="both", expand=True, padx=10, pady=10)
+
+# Analytics & Insights tab
+analytics_tab = ttk.Frame(nb); nb.add(analytics_tab, text="Analytics & Insights")
+analytics_box = scrolledtext.ScrolledText(analytics_tab, wrap="word", font=("Consolas", 9), padx=10, pady=10)
+analytics_box.pack(fill="both", expand=True); analytics_box.config(state="disabled")
 
 # Driver Updates tab
 drivers_tab = ttk.Frame(nb); nb.add(drivers_tab, text="Driver Updates")

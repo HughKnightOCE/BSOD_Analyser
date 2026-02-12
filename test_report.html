@@ -1,0 +1,47 @@
+
+        <!DOCTYPE html>
+        <html>
+        <head>
+            <meta charset="utf-8">
+            <title>BSOD Analyzer Report</title>
+            <style>
+                body { font-family: Arial, sans-serif; margin: 20px; background: #f5f5f5; }
+                h1 { color: #1e40af; border-bottom: 3px solid #1e40af; padding-bottom: 10px; }
+                h2 { color: #dc2626; margin-top: 30px; }
+                table { border-collapse: collapse; width: 100%; background: white; margin: 20px 0; }
+                th { background: #1e40af; color: white; padding: 10px; text-align: left; }
+                td { border: 1px solid #ddd; padding: 10px; }
+                tr:nth-child(even) { background: #f9f9f9; }
+                .metadata { background: #e0e7ff; padding: 15px; border-radius: 5px; }
+                .warning { color: #dc2626; font-weight: bold; }
+            </style>
+        </head>
+        <body>
+            <h1>BSOD Analyzer Report</h1>
+            <div class="metadata">
+                <p><b>Generated:</b> Thu, 12 Feb 2026 08:14:39 PM</p>
+                <p><b>Lookback Period:</b> 30 days</p>
+                <p><b>Admin Rights:</b> True</p>
+            </div>
+            
+            <h2>Summary</h2>
+            <p><b>BugChecks Found:</b> 1</p>
+            <p><b>Suspicious Events:</b> 2</p>
+            <p><b>Recent Errors/Warnings:</b> 0</p>
+            
+            <h2>Blue Screen Events</h2>
+            <table>
+                <tr><th>Time</th><th>Stop Code</th><th>Name</th><th>Description</th></tr>
+                <tr><td>2026-02-12 14:30:45</td><td>0x00000124</td><td>WHEA_UNCORRECTABLE_ERROR</td><td>Hardware error detected</td></tr>
+            </table>
+            
+            <h2>Suspected Problem Sources</h2>
+            <table>
+                <tr><th>Provider</th><th>Event ID</th><th>Occurrences</th></tr>
+                <tr><td>atikmdag.sys</td><td>165</td><td>3</td></tr><tr><td>System</td><td>41</td><td>2</td></tr>
+            </table>
+            
+            <p class="warning">⚠️ Always back up critical data before running system repairs.</p>
+        </body>
+        </html>
+        

@@ -8,11 +8,14 @@ General Windows error checker (incl. BSOD) with:
 - Live monitor hooks
 - Health tools (SFC/DISM/CHKDSK/MDSCHED)
 - Persistent settings (settings.json)
+- Advanced analytics and crash pattern detection
+- PDF report generation
+- Parallel processing for faster queries
 
 Branding:
   APP_NAME        = "Windows Error Checker"
   DEV_SIGNATURE   = "H.Knight"
-  APP_VERSION     = "0.9.1"
+  APP_VERSION     = "0.9.2"
 """
 
 import ctypes
@@ -24,16 +27,29 @@ import subprocess
 import sys
 import threading
 import importlib
+from concurrent.futures import ThreadPoolExecutor, as_completed
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
 from textwrap import shorten
+
+# Try importing optional modules
+try:
+    from analytics import CrashAnalytics, CustomRuleEngine
+except ImportError:
+    CrashAnalytics = None
+    CustomRuleEngine = None
+
+try:
+    from pdf_export import PDFReportGenerator
+except ImportError:
+    PDFReportGenerator = None
 
 # ----------------------------
 # Branding
 # ----------------------------
 APP_NAME = "Windows Error Checker"
 DEV_SIGNATURE = "H.Knight"
-APP_VERSION = "0.9.1"
+APP_VERSION = "0.9.2"
 
 # ----------------------------
 # Settings & paths
@@ -256,6 +272,25 @@ def event_description(provider: str, event_id: int):
 
 def shorttext(s, n=150):
     return shorten(s or "", width=n, placeholder="…")
+
+# Parallel processing for faster queries
+def get_events_parallel(queries: list, start_time=None, max_workers: int = 4):
+    """Get events from multiple queries in parallel for faster processing"""
+    results = {}
+    with ThreadPoolExecutor(max_workers=max_workers) as executor:
+        future_to_key = {}
+        for log_name, provider_name, ids in queries:
+            key = f"{log_name}|{provider_name or '*'}|{','.join(map(str, ids)) if ids else '*'}"
+            future = executor.submit(get_events, log_name, provider_name, ids, start_time)
+            future_to_key[future] = key
+        
+        for future in as_completed(future_to_key):
+            key = future_to_key[future]
+            try:
+                results[key] = future.result()
+            except Exception as e:
+                results[key] = []
+    return results
 
 # Optional timeline plotting (dynamic import to avoid static warnings)
 def _maybe_plot_timeline(bugchecks, out_png: Path):
@@ -558,12 +593,17 @@ def run_analysis():
     start = datetime.now(timezone.utc) - timedelta(days=lookback_days)
     admin = is_admin()
 
-    # BSOD & suspects set
+    # BSOD & suspects set (parallel processing for speed)
     all_events = {}
+    
+    # Use parallel processing to query events faster
+    query_list = [(log, provider, ids) for log, provider, ids in BSOD_AND_SUSPECT_QUERIES]
+    parallel_results = get_events_parallel(query_list, start_time=start, max_workers=4)
+    
+    # Map results back to our event dict
     for (log, provider, ids) in BSOD_AND_SUSPECT_QUERIES:
         key = f"{log}|{provider or '*'}|{','.join(map(str, ids)) if ids else '*'}"
-        evts = get_events(log, provider, ids, start_time=start)
-        all_events[key] = evts
+        all_events[key] = parallel_results.get(key, [])
 
     # BugChecks
     bugchecks, bsod_times = [], []

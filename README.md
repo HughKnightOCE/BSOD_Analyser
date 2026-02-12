@@ -391,7 +391,7 @@ Windows diagnostics are complex. Use this tool as a starting point, not a comple
 
 Potential future features:
 - [ ] Automated minidump WinDbg analysis
-- [ ] Machine learning crash pattern recognition
+- [ ] Advanced crash pattern recognition from historical data
 - [ ] Custom event log filter rules
 - [ ] PDF report export
 - [ ] Crash history tracking and comparison
