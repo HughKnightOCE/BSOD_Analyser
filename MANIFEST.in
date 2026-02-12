@@ -1,0 +1,8 @@
+include README.md
+include LICENSE
+include settings.json
+include pyproject.toml
+include setup.py
+recursive-include . *.csv
+recursive-include . *.ico
+recursive-include . *.png

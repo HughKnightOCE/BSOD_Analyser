@@ -1,0 +1,137 @@
+# Windows BSOD / Crash Report
+
+- Generated: Fri, 12 Sep 2025 02:44:37 PM AUS Eastern Standard Time
+- Lookback: last 30 days
+- Admin: 0
+- Output folder: `C:\Users\Hugh\Qsync\Coding projects\BSOD Analyzer`
+
+## BugChecks
+- **Mon, 18 Aug 2025 06:24:52 PM AUS Eastern Standard Time** — `0x00000050` **PAGE_FAULT_IN_NONPAGED_AREA**
+  - Invalid memory reference in nonpaged region. Commonly faulty RAM, disk corruption, or drivers.
+  - Parameters: 0xffff9b1f366beb68, 0x0000000000000000, 0xfffff8015bb2bbeb, 0x0000000000000002
+  - Dump: `C:\WINDOWS\Minidumps\081825-26015-01.dmp`
+  - Note: The computer has rebooted from a bugcheck. The bugcheck was: 0x00000050 (0xffff9b1f366beb68, 0x0000000000000000, 0xfffff8015bb2bbeb, 0x0000000000000002). A dump was saved in: C:\WINDOWS\Minidumps\081825-26015-01.dmp. Report Id: 4ed56d94-84b5-40cf-8611-e1297137dc56.
+- **Tue, 19 Aug 2025 07:45:53 PM AUS Eastern Standard Time** — `0x0000001e` **KMODE_EXCEPTION_NOT_HANDLED**
+  - Unhandled kernel exception. Typically buggy/old drivers or kernel extensions.
+  - Parameters: 0xffffffffc0000005, 0xfffff80125e5d415, 0x0000000000000000, 0xffffffffffffffff
+  - Dump: `C:\WINDOWS\Minidumps\081925-40390-01.dmp`
+  - Note: The computer has rebooted from a bugcheck. The bugcheck was: 0x0000001e (0xffffffffc0000005, 0xfffff80125e5d415, 0x0000000000000000, 0xffffffffffffffff). A dump was saved in: C:\WINDOWS\Minidumps\081925-40390-01.dmp. Report Id: f2370fec-c707-47f0-a7ea-dc572143fea0.
+- **Wed, 20 Aug 2025 09:38:04 PM AUS Eastern Standard Time** — `0x0000003b` **SYSTEM_SERVICE_EXCEPTION**
+  - Exception in a system service. Often GPU/display, antivirus hooks, or bad drivers.
+  - Parameters: 0x00000000c0000005, 0xfffff80784d0893f, 0xfffffc8b68fc5d90, 0x0000000000000000
+  - Dump: `C:\WINDOWS\Minidumps\082025-21375-01.dmp`
+  - Note: The computer has rebooted from a bugcheck. The bugcheck was: 0x0000003b (0x00000000c0000005, 0xfffff80784d0893f, 0xfffffc8b68fc5d90, 0x0000000000000000). A dump was saved in: C:\WINDOWS\Minidumps\082025-21375-01.dmp. Report Id: 8d1ce512-7dac-4db0-b559-2fedaa32f713.
+- **Sun, 24 Aug 2025 10:39:02 PM AUS Eastern Standard Time** — `0x0000001e` **KMODE_EXCEPTION_NOT_HANDLED**
+  - Unhandled kernel exception. Typically buggy/old drivers or kernel extensions.
+  - Parameters: 0xffffffffc0000005, 0xfffff80197bfd415, 0x0000000000000000, 0xffffffffffffffff
+  - Dump: `C:\WINDOWS\Minidumps\082425-36890-01.dmp`
+  - Note: The computer has rebooted from a bugcheck. The bugcheck was: 0x0000001e (0xffffffffc0000005, 0xfffff80197bfd415, 0x0000000000000000, 0xffffffffffffffff). A dump was saved in: C:\WINDOWS\Minidumps\082425-36890-01.dmp. Report Id: abfbaec0-c79d-4d05-a3a7-0ba1878ba8dd.
+- **Mon, 25 Aug 2025 05:30:28 PM AUS Eastern Standard Time** — `0x00000050` **PAGE_FAULT_IN_NONPAGED_AREA**
+  - Invalid memory reference in nonpaged region. Commonly faulty RAM, disk corruption, or drivers.
+  - Parameters: 0xffffedcf7ebf22a0, 0x0000000000000002, 0xfffff807523f02ea, 0x0000000000000002
+  - Dump: `C:\WINDOWS\Minidumps\082525-40546-01.dmp`
+  - Note: The computer has rebooted from a bugcheck. The bugcheck was: 0x00000050 (0xffffedcf7ebf22a0, 0x0000000000000002, 0xfffff807523f02ea, 0x0000000000000002). A dump was saved in: C:\WINDOWS\Minidumps\082525-40546-01.dmp. Report Id: 7483bf64-3a30-4ff2-b194-634f75494aeb.
+- **Mon, 25 Aug 2025 05:34:29 PM AUS Eastern Standard Time** — `0x0000001e` **KMODE_EXCEPTION_NOT_HANDLED**
+  - Unhandled kernel exception. Typically buggy/old drivers or kernel extensions.
+  - Parameters: 0xffffffffc0000005, 0xfffff8013fd0d415, 0x0000000000000000, 0xffffffffffffffff
+  - Dump: `C:\WINDOWS\Minidumps\082525-23156-01.dmp`
+  - Note: The computer has rebooted from a bugcheck. The bugcheck was: 0x0000001e (0xffffffffc0000005, 0xfffff8013fd0d415, 0x0000000000000000, 0xffffffffffffffff). A dump was saved in: C:\WINDOWS\Minidumps\082525-23156-01.dmp. Report Id: b23fd0df-fba8-4a37-9c9a-c2340df639b4.
+- **Tue, 26 Aug 2025 09:46:54 AM AUS Eastern Standard Time** — `0x0000001e` **KMODE_EXCEPTION_NOT_HANDLED**
+  - Unhandled kernel exception. Typically buggy/old drivers or kernel extensions.
+  - Parameters: 0xffffffffc0000005, 0xfffff80093f4d415, 0x0000000000000000, 0xffffffffffffffff
+  - Dump: `C:\WINDOWS\Minidumps\082625-39578-01.dmp`
+  - Note: The computer has rebooted from a bugcheck. The bugcheck was: 0x0000001e (0xffffffffc0000005, 0xfffff80093f4d415, 0x0000000000000000, 0xffffffffffffffff). A dump was saved in: C:\WINDOWS\Minidumps\082625-39578-01.dmp. Report Id: 25b68d01-e65b-492d-b0a7-d9138beb0ccb.
+- **Sun, 31 Aug 2025 03:28:07 PM AUS Eastern Standard Time** — `0x00000050` **PAGE_FAULT_IN_NONPAGED_AREA**
+  - Invalid memory reference in nonpaged region. Commonly faulty RAM, disk corruption, or drivers.
+  - Parameters: 0xffffa75fedde6fb8, 0x0000000000000000, 0xfffff80436b60afc, 0x0000000000000002
+  - Dump: `C:\WINDOWS\Minidumps\083125-39812-01.dmp`
+  - Note: The computer has rebooted from a bugcheck. The bugcheck was: 0x00000050 (0xffffa75fedde6fb8, 0x0000000000000000, 0xfffff80436b60afc, 0x0000000000000002). A dump was saved in: C:\WINDOWS\Minidumps\083125-39812-01.dmp. Report Id: 60ca0f29-94d2-4c8d-91fd-b9a2c273c2cf.
+- **Mon, 01 Sep 2025 06:35:54 PM AUS Eastern Standard Time** — `0x1000007e` **Unknown stop code**
+  - No built-in description. Check WinDbg and drivers.
+  - Parameters: 0xffffffffc0000005, 0xfffff8044c7d0afc, 0xffff82892dfbec58, 0xffff82892dfbe490
+  - Dump: `C:\WINDOWS\Minidumps\090125-16984-01.dmp`
+  - Note: The computer has rebooted from a bugcheck. The bugcheck was: 0x1000007e (0xffffffffc0000005, 0xfffff8044c7d0afc, 0xffff82892dfbec58, 0xffff82892dfbe490). A dump was saved in: C:\WINDOWS\Minidumps\090125-16984-01.dmp. Report Id: c6fa9443-2819-45a7-b626-7dd5823867a8.
+- **Tue, 02 Sep 2025 03:44:30 PM AUS Eastern Standard Time** — `0x1000007e` **Unknown stop code**
+  - No built-in description. Check WinDbg and drivers.
+  - Parameters: 0xffffffffc0000005, 0xfffff8024f0e0afc, 0xffff958cc7556c58, 0xffff958cc7556490
+  - Dump: `C:\WINDOWS\Minidumps\090225-39171-01.dmp`
+  - Note: The computer has rebooted from a bugcheck. The bugcheck was: 0x1000007e (0xffffffffc0000005, 0xfffff8024f0e0afc, 0xffff958cc7556c58, 0xffff958cc7556490). A dump was saved in: C:\WINDOWS\Minidumps\090225-39171-01.dmp. Report Id: a336d724-0b27-4330-bff7-ec23a0e5025b.
+- **Wed, 03 Sep 2025 12:27:59 PM AUS Eastern Standard Time** — `0x0000001e` **KMODE_EXCEPTION_NOT_HANDLED**
+  - Unhandled kernel exception. Typically buggy/old drivers or kernel extensions.
+  - Parameters: 0xffffffffc0000005, 0xfffff8037c934177, 0x0000000000000000, 0xffffffffffffffff
+  - Dump: `C:\WINDOWS\Minidumps\090325-20062-01.dmp`
+  - Note: The computer has rebooted from a bugcheck. The bugcheck was: 0x0000001e (0xffffffffc0000005, 0xfffff8037c934177, 0x0000000000000000, 0xffffffffffffffff). A dump was saved in: C:\WINDOWS\Minidumps\090325-20062-01.dmp. Report Id: cf513983-adae-457a-bd0f-526b98e61195.
+- **Thu, 04 Sep 2025 03:57:31 PM AUS Eastern Standard Time** — `0x1000007e` **Unknown stop code**
+  - No built-in description. Check WinDbg and drivers.
+  - Parameters: 0xffffffffc0000005, 0xfffff80434f109c8, 0xfffffb0e1b3b6c58, 0xfffffb0e1b3b6490
+  - Dump: `C:\WINDOWS\Minidumps\090425-20031-01.dmp`
+  - Note: The computer has rebooted from a bugcheck. The bugcheck was: 0x1000007e (0xffffffffc0000005, 0xfffff80434f109c8, 0xfffffb0e1b3b6c58, 0xfffffb0e1b3b6490). A dump was saved in: C:\WINDOWS\Minidumps\090425-20031-01.dmp. Report Id: 35cbb5cf-a27d-4b7f-9765-bbd878261297.
+- **Sat, 06 Sep 2025 05:03:27 PM AUS Eastern Standard Time** — `0x1000007e` **Unknown stop code**
+  - No built-in description. Check WinDbg and drivers.
+  - Parameters: 0xffffffffc0000005, 0xfffff8063b3d09c8, 0xffffe20c55cc6c58, 0xffffe20c55cc6490
+  - Dump: `C:\WINDOWS\Minidumps\090625-38421-01.dmp`
+  - Note: The computer has rebooted from a bugcheck. The bugcheck was: 0x1000007e (0xffffffffc0000005, 0xfffff8063b3d09c8, 0xffffe20c55cc6c58, 0xffffe20c55cc6490). A dump was saved in: C:\WINDOWS\Minidumps\090625-38421-01.dmp. Report Id: 74fb6b0e-26a5-46c5-a318-b815d23e3443.
+- **Sat, 06 Sep 2025 05:05:21 PM AUS Eastern Standard Time** — `0x1000007e` **Unknown stop code**
+  - No built-in description. Check WinDbg and drivers.
+  - Parameters: 0xffffffffc0000005, 0xfffff80150730afc, 0xffffac89f3356c58, 0xffffac89f3356490
+  - Dump: `C:\WINDOWS\Minidumps\090625-16859-01.dmp`
+  - Note: The computer has rebooted from a bugcheck. The bugcheck was: 0x1000007e (0xffffffffc0000005, 0xfffff80150730afc, 0xffffac89f3356c58, 0xffffac89f3356490). A dump was saved in: C:\WINDOWS\Minidumps\090625-16859-01.dmp. Report Id: 2366a9c6-9b3d-47fa-b8c4-4043f349f220.
+- **Mon, 08 Sep 2025 05:18:46 PM AUS Eastern Standard Time** — `0x1000007e` **Unknown stop code**
+  - No built-in description. Check WinDbg and drivers.
+  - Parameters: 0xffffffffc0000005, 0xfffff807548909c8, 0xfffffa833b4a6c58, 0xfffffa833b4a6490
+  - Dump: `C:\WINDOWS\Minidumps\090825-40437-01.dmp`
+  - Note: The computer has rebooted from a bugcheck. The bugcheck was: 0x1000007e (0xffffffffc0000005, 0xfffff807548909c8, 0xfffffa833b4a6c58, 0xfffffa833b4a6490). A dump was saved in: C:\WINDOWS\Minidumps\090825-40437-01.dmp. Report Id: d24ff4a4-a035-4c42-b657-c32b4f59ecde.
+- **Thu, 11 Sep 2025 07:17:04 PM AUS Eastern Standard Time** — `0x00000050` **PAGE_FAULT_IN_NONPAGED_AREA**
+  - Invalid memory reference in nonpaged region. Commonly faulty RAM, disk corruption, or drivers.
+  - Parameters: 0xfffffef7fed36fb8, 0x0000000000000000, 0xfffff805633f0afc, 0x0000000000000002
+  - Dump: `C:\WINDOWS\Minidumps\091125-26078-01.dmp`
+  - Note: The computer has rebooted from a bugcheck. The bugcheck was: 0x00000050 (0xfffffef7fed36fb8, 0x0000000000000000, 0xfffff805633f0afc, 0x0000000000000002). A dump was saved in: C:\WINDOWS\Minidumps\091125-26078-01.dmp. Report Id: 1867fe24-9c05-4451-814b-b9212e4d50d7.
+- **Thu, 11 Sep 2025 07:27:31 PM AUS Eastern Standard Time** — `0x00000050` **PAGE_FAULT_IN_NONPAGED_AREA**
+  - Invalid memory reference in nonpaged region. Commonly faulty RAM, disk corruption, or drivers.
+  - Parameters: 0xffffd0fedb736fb8, 0x0000000000000000, 0xfffff80168040afc, 0x0000000000000002
+  - Dump: `C:\WINDOWS\Minidumps\091125-22921-01.dmp`
+  - Note: The computer has rebooted from a bugcheck. The bugcheck was: 0x00000050 (0xffffd0fedb736fb8, 0x0000000000000000, 0xfffff80168040afc, 0x0000000000000002). A dump was saved in: C:\WINDOWS\Minidumps\091125-22921-01.dmp. Report Id: e7acd060-09af-4022-9e78-ad843eebf018.
+- **Thu, 11 Sep 2025 07:47:38 PM AUS Eastern Standard Time** — `0x1000007e` **Unknown stop code**
+  - No built-in description. Check WinDbg and drivers.
+  - Parameters: 0xffffffffc0000005, 0xfffff80190580afc, 0xffff8404bef4ec58, 0xffff8404bef4e490
+  - Dump: `C:\WINDOWS\Minidumps\091125-41093-01.dmp`
+  - Note: The computer has rebooted from a bugcheck. The bugcheck was: 0x1000007e (0xffffffffc0000005, 0xfffff80190580afc, 0xffff8404bef4ec58, 0xffff8404bef4e490). A dump was saved in: C:\WINDOWS\Minidumps\091125-41093-01.dmp. Report Id: daca1603-2e95-4ad4-aaaa-20ea336a890c.
+- **Thu, 11 Sep 2025 08:28:54 PM AUS Eastern Standard Time** — `0x1000007e` **Unknown stop code**
+  - No built-in description. Check WinDbg and drivers.
+  - Parameters: 0xffffffffc0000005, 0xfffff8069fc709c8, 0xffffe30a3ff2ec58, 0xffffe30a3ff2e490
+  - Dump: `C:\WINDOWS\Minidumps\091125-37078-01.dmp`
+  - Note: The computer has rebooted from a bugcheck. The bugcheck was: 0x1000007e (0xffffffffc0000005, 0xfffff8069fc709c8, 0xffffe30a3ff2ec58, 0xffffe30a3ff2e490). A dump was saved in: C:\WINDOWS\Minidumps\091125-37078-01.dmp. Report Id: 71cdb96b-86c8-4728-a6b7-ddae3392917c.
+- **Thu, 11 Sep 2025 08:31:36 PM AUS Eastern Standard Time** — `0x1000007e` **Unknown stop code**
+  - No built-in description. Check WinDbg and drivers.
+  - Parameters: 0xffffffffc0000005, 0xfffff804748c0afc, 0xffff8b04263d6c58, 0xffff8b04263d6490
+  - Dump: `C:\WINDOWS\Minidumps\091125-18546-01.dmp`
+  - Note: The computer has rebooted from a bugcheck. The bugcheck was: 0x1000007e (0xffffffffc0000005, 0xfffff804748c0afc, 0xffff8b04263d6c58, 0xffff8b04263d6490). A dump was saved in: C:\WINDOWS\Minidumps\091125-18546-01.dmp. Report Id: 2242bb82-cab3-41e8-8a9a-4636b147dfff.
+- **Thu, 11 Sep 2025 11:36:01 PM AUS Eastern Standard Time** — `0x0000003b` **SYSTEM_SERVICE_EXCEPTION**
+  - Exception in a system service. Often GPU/display, antivirus hooks, or bad drivers.
+  - Parameters: 0x00000000c0000096, 0xfffff8032906c3af, 0xffffe680e7ae1920, 0x0000000000000000
+  - Dump: `C:\WINDOWS\Minidumps\091125-39203-01.dmp`
+  - Note: The computer has rebooted from a bugcheck. The bugcheck was: 0x0000003b (0x00000000c0000096, 0xfffff8032906c3af, 0xffffe680e7ae1920, 0x0000000000000000). A dump was saved in: C:\WINDOWS\Minidumps\091125-39203-01.dmp. Report Id: 994a1559-8709-4551-aad1-ab1036a62783.
+- **Thu, 11 Sep 2025 11:38:27 PM AUS Eastern Standard Time** — `0x00000050` **PAGE_FAULT_IN_NONPAGED_AREA**
+  - Invalid memory reference in nonpaged region. Commonly faulty RAM, disk corruption, or drivers.
+  - Parameters: 0xffffff3b7cffefb8, 0x0000000000000000, 0xfffff80586f40afc, 0x0000000000000002
+  - Dump: `C:\WINDOWS\Minidumps\091125-18609-01.dmp`
+  - Note: The computer has rebooted from a bugcheck. The bugcheck was: 0x00000050 (0xffffff3b7cffefb8, 0x0000000000000000, 0xfffff80586f40afc, 0x0000000000000002). A dump was saved in: C:\WINDOWS\Minidumps\091125-18609-01.dmp. Report Id: d80d75f8-7517-461d-b3eb-30c9e2320965.
+- **Fri, 12 Sep 2025 10:59:28 AM AUS Eastern Standard Time** — `0x1000007e` **Unknown stop code**
+  - No built-in description. Check WinDbg and drivers.
+  - Parameters: 0xffffffffc0000005, 0xfffff804927409c8, 0xffffa701bf8b6c58, 0xffffa701bf8b6490
+  - Dump: `C:\WINDOWS\Minidumps\091225-26515-01.dmp`
+  - Note: The computer has rebooted from a bugcheck. The bugcheck was: 0x1000007e (0xffffffffc0000005, 0xfffff804927409c8, 0xffffa701bf8b6c58, 0xffffa701bf8b6490). A dump was saved in: C:\WINDOWS\Minidumps\091225-26515-01.dmp. Report Id: 3cc1c76f-f4b0-4b4d-b7da-9a40e7e5c26b.
+- **Fri, 12 Sep 2025 11:52:05 AM AUS Eastern Standard Time** — `0x1000007e` **Unknown stop code**
+  - No built-in description. Check WinDbg and drivers.
+  - Parameters: 0xffffffffc0000005, 0xfffff801989009c8, 0xffffeb059276ec58, 0xffffeb059276e490
+  - Dump: `C:\WINDOWS\Minidumps\091225-32328-01.dmp`
+  - Note: The computer has rebooted from a bugcheck. The bugcheck was: 0x1000007e (0xffffffffc0000005, 0xfffff801989009c8, 0xffffeb059276ec58, 0xffffeb059276e490). A dump was saved in: C:\WINDOWS\Minidumps\091225-32328-01.dmp. Report Id: 8efb60dc-b760-445a-8541-a585fa8c962f.
+
+## Top suspects near BSODs
+- **disk** (Event 153) — 565 — Storport: IO retries — storage is timing out (cable/port/driver).
+- **Microsoft-Windows-WHEA-Logger** (Event 3) — 30
+- **Microsoft-Windows-Kernel-Power** (Event 41) — 28 — System rebooted without clean shutdown (power loss, crash, hang).
+- **Microsoft-Windows-WHEA-Logger** (Event 1) — 21 — WHEA: Machine Check Exception reported by CPU.
+- **Microsoft-Windows-Servicing** (Event 3) — 1
+- **Microsoft-Windows-Servicing** (Event 4) — 1
+- **Microsoft-Windows-Servicing** (Event 2) — 1
