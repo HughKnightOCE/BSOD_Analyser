@@ -1,73 +1,93 @@
 # BSOD Analyzer
 
-Windows Error Checker: Blue Screen of Death analyzer with event log scanning, hardware diagnostics, and driver management.
+Windows Blue Screen of Death (BSOD) diagnostic tool that automates crash analysis, event log scanning, hardware diagnostics, and driver management.
 
 **Version:** 0.9.1  
 **Author:** H.Knight  
-**License:** MIT
+**License:** MIT  
+**Repository:** [GitHub](https://github.com/HughKnightOCE/BSOD_Analyser)
 
-## Overview
+## 🎯 What It Does
 
-BSOD Analyzer is a comprehensive Windows diagnostic tool that:
+BSOD Analyzer helps you diagnose Windows crashes by:
 
-- **Scans Event Logs** for Blue Screen (BSOD) events and related crashes
-- **Analyzes Error Patterns** to identify frequently recurring issues
-- **Correlates Events** near BSOD times to find likely culprits (drivers, hardware, firmware)
-- **Monitors Hardware** — GPU info, SMART status, storage reliability counters
-- **Suggests Fixes** with human-readable descriptions for common stop codes (0x50, 0x1E, 0x3B, 0x116, 0x124, etc.)
-- **Manages Drivers** — lists and installs updates from Windows Update
-- **Runs Health Checks** — SFC, DISM, CHKDSK, and Windows Memory Diagnostic
-- **Generates Reports** — Markdown + CSV exports for analysis and troubleshooting
+- **🔍 Scanning Event Logs** — Finds BSOD (Blue Screen) crash events
+- **📊 Analyzing Patterns** — Identifies frequently recurring errors
+- **⚙️ Correlating Events** — Finds events clustered near crashes (driver suspects)
+- **💾 Checking Hardware** — GPU, SMART disk, storage reliability, system info
+- **🔧 Managing Drivers** — Lists and installs Windows Update driver updates
+- **🛠️ Running Health Tools** — SFC, DISM, CHKDSK, Memory Diagnostic
+- **📈 Generating Reports** — Professional Markdown and CSV outputs
+- **🚀 Real-Time Monitoring** — Live system event polling
 
-## Requirements
+## ⚡ Quick Start
 
-- **Windows 10/11** (21H2 or later recommended)
-- **Python 3.8+** (3.11+ recommended for best compatibility)
-- **Administrator rights** for full functionality (logs, minidumps, driver install)
+### Download & Run (No Installation)
 
-## Installation
-
-### ⚡ Quick Start: Standalone Executable (Recommended)
-
-**Download [BSOD_Analyzer.exe](https://github.com/HughKnightOCE/BSOD_Analyser/releases)** — No installation needed!
+**[Download BSOD_Analyzer.exe](https://github.com/HughKnightOCE/BSOD_Analyser/releases)** — Standalone executable for Windows 10/11
 
 ```powershell
-# Run directly
 .\BSOD_Analyzer.exe
-
-# Or use admin launcher
+# or with admin auto-elevation:
 .\BSOD_Analyzer_Admin.bat
 ```
 
-See [EXECUTABLE_DISTRIBUTION.md](EXECUTABLE_DISTRIBUTION.md) for details.
+**No Python installation needed!** Everything is bundled into the .exe.
 
-### Option 1: From Source (Development)
-
-1. Clone or download the repository
-2. Create a virtual environment:
-   ```powershell
-   python -m venv .venv
-   .\.venv\Scripts\Activate.ps1
-   ```
-3. Install dependencies:
-   ```powershell
-   pip install -r requirements.txt
-   ```
-4. Run the GUI:
-   ```powershell
-   python bsod_ui.py
-   ```
-
-### Option 2: Build Distribution (Wheel/Source)
+### Run from Python
 
 ```powershell
-python -m pip install build
-python -m build
-# Distributions in dist/
+git clone https://github.com/HughKnightOCE/BSOD_Analyser.git
+cd BSOD_Analyser
+python -m venv .venv
+.\.venv\Scripts\Activate.ps1
+pip install -r requirements.txt
+python bsod_ui.py
+```
+
+## 📋 Installation Options
+
+### Option 1: ⭐ Standalone Executable (Easiest)
+
+**Download:** [BSOD_Analyzer.exe](https://github.com/HughKnightOCE/BSOD_Analyser/releases)
+
+- Windows 10/11 only
+- 12.11 MB single file
+- Python runtime included
+- All dependencies bundled
+- No installation required
+
+### Option 2: Python from Source
+
+**Clone the repository:**
+```powershell
+git clone https://github.com/HughKnightOCE/BSOD_Analyser.git
+cd BSOD_Analyser
+```
+
+**Create virtual environment:**
+```powershell
+python -m venv .venv
+.\.venv\Scripts\Activate.ps1
+```
+
+**Install dependencies:**
+```powershell
+pip install -r requirements.txt
+```
+
+**Run GUI:**
+```powershell
+python bsod_ui.py
+```
+
+### Option 3: Python Package Installation
+
+```powershell
 pip install dist/bsod_analyzer-0.9.1-py3-none-any.whl
 ```
 
-### Option 3: Build Your Own Executable
+### Option 4: Build Your Own Executable
 
 ```powershell
 pip install pyinstaller
@@ -75,27 +95,85 @@ pyinstaller --onefile --windowed --name BSOD_Analyzer bsod_ui.py
 # Output: dist\BSOD_Analyzer.exe
 ```
 
-## Usage
+## 🖥️ System Requirements
 
-### GUI (Recommended)
+- **OS:** Windows 10/11 (21H2 or later recommended)
+- **Python:** 3.8+ (if running from source; 3.11+ recommended)
+- **Admin Rights:** Required for:
+  - Full event log access
+  - Minidump file access
+  - Driver installation
+  - Health tools (SFC, DISM, CHKDSK, Memory Test)
 
-```powershell
-python bsod_ui.py
-```
+## 🎮 Using BSOD Analyzer
 
-**Tabs:**
-- **Summary** — Latest BugChecks, dump file locations, report path
-- **Errors** — Recent system/application errors and warnings
-- **BugChecks** — BSOD stop codes with parameter analysis
-- **Suspects** — Events that correlate with crash times
-- **Driver Updates** — Windows Update driver list, install managed
-- **System Info** — GPU, SMART, storage, updates; health tools (SFC, DISM, CHKDSK, Memory Test)
-- **Live Monitor** — Real-time System log polling
+### GUI Interface
 
-### Settings
+Seven tabs for comprehensive diagnostics:
 
-Edit or create `settings.json`:
+| Tab | Purpose |
+|-----|---------|
+| **Summary** | Latest BugChecks, stop codes, dump file paths |
+| **Errors** | Recent System/Application errors with frequency stats |
+| **BugChecks** | BSOD events with codes, parameters, timestamps |
+| **Suspects** | Events clustered near crash times (likely causes) |
+| **Driver Updates** | Available Windows Update drivers with install option |
+| **System Info** | GPU, SMART, storage, updates; health diagnostic tools |
+| **Live Monitor** | Real-time System log polling and event streaming |
 
+### Tabs Overview
+
+**Summary Tab**
+- View latest BSOD crashes
+- Check stop codes and friendly names
+- See dump file locations (for WinDbg analysis)
+- Configure report folder and analysis window
+
+**Errors Tab**
+- Recent critical/error/warning events
+- Top recurrent issues with color-coded severity
+- Time, source provider, event ID, message
+
+**BugChecks Tab**
+- All BSOD events in lookback period
+- Stop code, friendly name, parameters
+- Minidump file paths (if available)
+- Export to CSV for archival
+
+**Suspects Tab**
+- Events that correlate with crash times
+- Severity color-coded (critical/high/medium/low)
+- Provider, event ID, occurrence count
+- Likely culprits for troubleshooting
+
+**Driver Updates Tab**
+- Search Windows Update for driver updates
+- Manufacturer, version, release date
+- One-click install (requires admin)
+- Microsoft support links per driver
+
+**System Info Tab**
+- GPU information (model, driver, date)
+- SMART disk status (all detected drives)
+- Storage reliability counters (wear, temperature, error counts)
+- Recent Windows Updates
+- System snapshot (CPU, BIOS, RAM, OS)
+- Health diagnostic tools
+
+**Live Monitor Tab**
+- Real-time event stream from System log
+- Auto-scrolling display
+- Configurable polling interval (default: 10 seconds)
+- Useful for capturing events during troubleshooting
+
+### Configuration
+
+**Via GUI:**
+- Change report folder: Summary tab → "Change Report Folder"
+- Adjust lookback period: Settings area → "Lookback (days)"
+- Set correlation window: Settings area → "BSOD window (±min)"
+
+**Via settings.json:**
 ```json
 {
   "report_dir": "C:\\path\\to\\report\\folder",
@@ -105,10 +183,11 @@ Edit or create `settings.json`:
 }
 ```
 
-- **report_dir** — Location for report output (Markdown, CSV)
-- **lookback_days** — How far back to scan event logs (1–365)
-- **window_min** — Time window (±minutes) to correlate events near BSOD
-- **poll_seconds** — Live monitor polling interval
+**Settings explained:**
+- `report_dir` — Where to save reports and CSVs
+- `lookback_days` — How far back to scan (1–365)
+- `window_min` — Event correlation window around BSODs (±minutes)
+- `poll_seconds` — Live monitor polling interval (seconds)
 
 ### Command-Line
 
@@ -116,115 +195,213 @@ Edit or create `settings.json`:
 python bsod_core.py
 ```
 
-Runs analysis and prints summary to console.
+Runs full analysis and prints summary. Outputs:
+- `ErrorChecker_Report/ErrorChecker_Report.md`
+- `ErrorChecker_Report/bugchecks.csv`
+- `ErrorChecker_Report/suspects.csv`
 
-## Stop Code Quick Reference
+## 🔍 Stop Code Reference
+
+Common BSOD stop codes with descriptions:
 
 | Code | Name | Typical Cause |
 |------|------|---------------|
-| **0x50** | PAGE_FAULT_IN_NONPAGED_AREA | RAM, drivers, disk corruption |
-| **0x1E** | KMODE_EXCEPTION_NOT_HANDLED | Buggy driver or kernel extension |
-| **0x3B** | SYSTEM_SERVICE_EXCEPTION | GPU/display, antivirus, drivers |
-| **0x116** | VIDEO_TDR_FAILURE | GPU driver/hardware/thermals |
-| **0x124** | WHEA_UNCORRECTABLE_ERROR | CPU/VRM/RAM/PCIe hardware issue |
-| **0x9F** | DRIVER_POWER_STATE_FAILURE | Sleep/USB/Wi-Fi drivers |
-| **0x7E** | SYSTEM_THREAD_EXCEPTION_NOT_HANDLED | Drivers or low-level software |
+| **0x0000000A** | IRQL_NOT_LESS_OR_EQUAL | RAM issue, driver problem, overclocking |
+| **0x0000001E** | KMODE_EXCEPTION_NOT_HANDLED | Buggy driver or kernel code |
+| **0x00000050** | PAGE_FAULT_IN_NONPAGED_AREA | RAM fault, disk error, driver bug |
+| **0x0000003B** | SYSTEM_SERVICE_EXCEPTION | GPU driver, antivirus, video driver |
+| **0x0000007E** | SYSTEM_THREAD_EXCEPTION_NOT_HANDLED | Faulty driver or system software |
+| **0x0000009F** | DRIVER_POWER_STATE_FAILURE | Sleep/USB/Wi-Fi driver |
+| **0x00000116** | VIDEO_TDR_FAILURE | GPU driver timeout—overheating, crash, PSU |
+| **0x00000124** | WHEA_UNCORRECTABLE_ERROR | Hardware error—CPU, RAM, PCIe, motherboard |
 
-## Features
+**Pro Tip:** BSOD Analyzer provides detailed descriptions for these codes. Just run a scan!
+
+## 🛠️ Features & Architecture
 
 ### Event Log Analysis
-- BugCheck (Event 1001) extraction and parameter parsing
-- System/Application error/warning aggregation
-- Temporal correlation with BSOD times
+- Automatic BSOD event detection (Event 1001)
+- Parameter extraction and parsing
+- System/Application log aggregation
+- Temporal correlation (events near crashes)
+- Configurable lookback period
 
 ### Hardware Diagnostics
-- GPU info (model, driver version, date)
-- SMART disk status
-- Storage reliability counters (wear, temperature, errors)
-- System snapshot (CPU, BIOS, RAM, OS version, power plan)
+- GPU information (driver version, installation date)
+- SMART disk status summary
+- Storage reliability counters (wear level, temperature, I/O errors)
+- System snapshot (CPU cores, RAM, BIOS, OS version, power plan)
+- Windows Update history
 
-### Health Tools (Admin required)
-- **SFC** — System File Checker scan
-- **DISM** — Windows image restore
-- **CHKDSK** — Disk integrity check
-- **Memory Diagnostic** — RAM test
+### Health Diagnostic Tools
+- **SFC** — System File Checker (repairs corrupted system files)
+- **DISM** — Deployment Image Servicing and Management (restores Windows)
+- **CHKDSK** — Check Disk (online disk integrity check)
+- **Memory Diagnostic** — Windows RAM testing (schedules reboot)
 
-### Driver Management (Admin required)
-- Search Windows Update for available driver updates
-- Display update information (manufacturer, version, date)
-- One-click install with reboot scheduling
+### Driver Management
+- Windows Update driver search
+- Filter by manufacturer, class, version
+- Display driver information links
+- One-click install with reboot handling
+- Admin required for installation
 
 ### Report Generation
-- **ErrorChecker_Report.md** — Human-readable summary
-- **bugchecks.csv** — BSOD codes, times, parameters, dump paths
-- **suspects.csv** — Correlated event summary
-- **Timeline chart** (if matplotlib available) — BSOD frequency by day
+- **Markdown Report** — Professional, human-readable format
+- **BugChecks CSV** — Codes, times, parameters, dump paths
+- **Suspects CSV** — Events correlated with crashes
+- **Timeline Chart** — BSOD frequency by day (if matplotlib installed)
 
-## Architecture
+### Live Monitoring
+- Real-time System log polling
+- Auto-scrolling event stream
+- Configurable interval (default 10 seconds)
+- Useful for capturing events during troubleshooting
 
-- **bsod_core.py** — Analysis engine: event querying, parsing, inventory
-- **bsod_ui.py** — Tkinter GUI with 7 tabs and async threading
-- **driver_updates.py** — PowerShell COM wrapper for Windows Update
+## 📦 Architecture
 
-All PowerShell operations are run with `-NoProfile -ExecutionPolicy Bypass` for compatibility.
+**Three main modules:**
 
-## Known Limitations
+- **bsod_core.py** (Analysis Engine)
+  - PowerShell event log queries
+  - BSOD event parsing
+  - Hardware inventory collection
+  - Report generation
 
-- Requires Windows 10/11; earlier versions not supported
-- .dmp minidump analysis requires WinDbg (installation separate)
-- Some system info (SMART, storage reliability) may not be available on all systems
-- PowerShell scripts require full execution policy
+- **bsod_ui.py** (Tkinter GUI)
+  - 7 tabbed interface
+  - Async task threading
+  - Real-time progress feedback
+  - Settings management
 
-## Troubleshooting
+- **driver_updates.py** (Windows Update Manager)
+  - PowerShell COM wrapper
+  - Driver search/install orchestration
+  - No external package dependencies
+
+All PowerShell commands use: `-NoProfile -ExecutionPolicy Bypass`
+
+## 📊 Available Distributions
+
+| Format | File | Size | Best For |
+|--------|------|------|----------|
+| **Executable** | BSOD_Analyzer.exe | 12.11 MB | End users |
+| **Wheel** | bsod_analyzer-*.whl | 0.02 MB | Python pip install |
+| **Source** | bsod_analyzer-*.tar.gz | 0.02 MB | Distribution/repackaging |
+| **Git** | GitHub repo | ~5 MB | Development |
+
+**Download executable:** [GitHub Releases](https://github.com/HughKnightOCE/BSOD_Analyser/releases)
+
+## ⚠️ Known Limitations
+
+- **Windows Only** — Requires Windows 10/11
+- **Event Log Retention** — System log often limited to 7–14 days
+- **Minidump Analysis** — Requires separate WinDbg installation for deep analysis
+- **Hardware Info** — Some systems may not report SMART/storage reliability
+- **Execution Policy** — PowerShell requires Bypass or RemoteSigned
+
+## 🔧 Troubleshooting
 
 ### "Not running as Administrator"
-Relaunch with elevated privileges by clicking **Run Elevated** button or:
+Need admin rights for full features:
 ```powershell
 Start-Process python -ArgumentList "bsod_ui.py" -Verb RunAs
+# or use BSOD_Analyzer_Admin.bat
 ```
 
-### No BugChecks found
-- Check System event log retention (Settings → Admin Tools → Event Viewer)
-- Verify Event ID 1001 is not being filtered
-- Try increasing **Lookback (days)** in UI
+### No BugChecks Found
+- Check Event Viewer → System log retention policy
+- Increase "Lookback (days)" in UI settings
+- Verify Event ID 1001 isn't filtered
 
-### PowerShell errors
-Ensure execution policy allows unsigned scripts:
+### PowerShell Errors
+Enable script execution:
 ```powershell
 Set-ExecutionPolicy -ExecutionPolicy Bypass -Scope CurrentUser -Force
 ```
 
-### Missing driver updates
-- Windows Update may not have indexed yet (usually 24 hours)
-- Ensure `Microsoft.Update` COM objects are available
-- Try running as Administrator
+### Driver Updates Not Showing
+- Windows Update may need 24 hours to index
+- Run as Administrator for best results
+- Check Settings → Updates for pending operations
 
-## Development
+### SMART/Storage Reliability Missing
+- Not all systems expose these metrics
+- Virtual machines may have limited WMI info
+- Physical drives more reliable than USB
 
-Clone and set up dev environment:
+## 👨‍💻 Development & Contributing
 
+### Clone & Setup
 ```powershell
-git clone https://github.com/yourusername/bsod-analyzer.git
-cd bsod-analyzer
+git clone https://github.com/HughKnightOCE/BSOD_Analyser.git
+cd BSOD_Analyser
 python -m venv .venv
 .\.venv\Scripts\Activate.ps1
-pip install -e .
+pip install -r requirements.txt
 ```
 
-Run tests or modifications to the three main modules in the repo root.
+### Run from Source
+```powershell
+python bsod_ui.py
+```
 
-## Contributing
+### Build Executable
+```powershell
+pip install pyinstaller
+pyinstaller --onefile --windowed bsod_ui.py
+```
 
-Community feedback and issues are welcome. Please report bugs via GitHub Issues.
+### Contributing
+- **Issues:** [Report bugs](https://github.com/HughKnightOCE/BSOD_Analyser/issues)
+- **Pull Requests:** Contributions welcome!
+- **Suggestions:** Feature requests appreciated
 
-## License
+## 📄 License
 
-MIT License — See LICENSE file for details.
+**MIT License** — Free to use, modify, and distribute.
 
-## Disclaimer
+See [LICENSE](LICENSE) file for full legal terms.
 
-This tool is provided as-is for diagnostic purposes. Use at your own risk. Always back up important data before running system repair tools (SFC, DISM, CHKDSK). Windows diagnostics and minidump analysis are complex; consult Microsoft documentation or professional support for interpretation.
+## 🙋 Support
+
+- **[GitHub Repository](https://github.com/HughKnightOCE/BSOD_Analyser)** — Code and issues
+- **[Releases](https://github.com/HughKnightOCE/BSOD_Analyser/releases)** — Download executable
+- **[Issues](https://github.com/HughKnightOCE/BSOD_Analyser/issues)** — Bug reports
+- **In-App Help** — Info and About buttons in GUI
+
+Comprehensive guides:
+- [EXECUTABLE_DISTRIBUTION.md](EXECUTABLE_DISTRIBUTION.md) — Executable user guide
+- [DISTRIBUTION_GUIDE.md](DISTRIBUTION_GUIDE.md) — All distribution formats
+- [GITHUB_SETUP.md](GITHUB_SETUP.md) — Repository setup
+
+## ⚖️ Disclaimer
+
+This tool is provided **as-is** for diagnostic purposes.
+
+**⚠️ Important:**
+- Back up critical data before running repair tools
+- Understand what SFC, DISM, CHKDSK do before running
+- Consult Microsoft documentation for complex issues
+- Professional support recommended for critical systems
+
+Windows diagnostics are complex. Use this tool as a starting point, not a complete solution.
+
+## 📈 Roadmap
+
+Potential future features:
+- [ ] Automated minidump WinDbg analysis
+- [ ] Machine learning crash pattern recognition
+- [ ] Custom event log filter rules
+- [ ] PDF report export
+- [ ] Crash history tracking and comparison
+- [ ] Multi-language support
+- [ ] CI/CD marketplace distribution
 
 ---
 
-**Questions?** Check the built-in **Info** and **About** dialogs in the GUI.
+**Created by:** H.Knight  
+**Last Updated:** February 2026  
+**Status:** Active Development
+
+Made with 🛠️ for Windows troubleshooting.
