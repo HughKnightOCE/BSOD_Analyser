@@ -47,7 +47,7 @@ except ImportError:
 # ----------------------------
 # Branding
 # ----------------------------
-APP_NAME = "Windows Error Checker"
+APP_NAME = "BSOD Analyzer"
 DEV_SIGNATURE = "H.Knight"
 APP_VERSION = "0.9.2"
 

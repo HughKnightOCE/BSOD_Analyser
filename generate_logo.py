@@ -18,45 +18,48 @@ def generate_with_pil():
         
         # Try to load a nice font
         try:
-            font_large = ImageFont.truetype("C:\\Windows\\Fonts\\segoeui.ttf", 80)
-            font_small = ImageFont.truetype("C:\\Windows\\Fonts\\segoeui.ttf", 32)
+            font_title = ImageFont.truetype("C:\\Windows\\Fonts\\segoeui.ttf", 48)
+            font_subtitle = ImageFont.truetype("C:\\Windows\\Fonts\\segoeui.ttf", 18)
         except:
-            font_large = ImageFont.load_default()
-            font_small = ImageFont.load_default()
+            font_title = ImageFont.load_default()
+            font_subtitle = ImageFont.load_default()
         
-        # Dark grey background with gradient effect
+        # Dark grey background with subtle gradient
         for y in range(512):
-            intensity = int(42 + (y / 512) * 30)  # Gradient from #2a2a2d to darker
+            intensity = int(42 + (y / 512) * 15)  # Subtle gradient
             draw.rectangle([(0, y), (512, y+1)], fill=(intensity, intensity, intensity))
         
-        # Draw purple accent circle (top right)
-        draw.ellipse([(350, 10), (500, 160)], fill=(124, 58, 237, 200), outline=(124, 58, 237, 255), width=3)
+        # Draw a subtle purple accent bar on the left
+        draw.rectangle([(0, 0), (8, 512)], fill=(124, 58, 237))
         
-        # Draw white circle (center)
-        draw.ellipse([(80, 80), (432, 432)], fill=(240, 240, 240), outline=(200, 200, 200), width=2)
-        
-        # Draw "BA" text (BSOD Analyzer initials) in dark grey
-        text_bbox = draw.textbbox((0, 0), "BA", font=font_large)
+        # Draw "BSOD Analyzer" as main text (professional styling)
+        text_bbox = draw.textbbox((0, 0), "BSOD Analyzer", font=font_title)
         text_width = text_bbox[2] - text_bbox[0]
         text_height = text_bbox[3] - text_bbox[1]
         text_x = 256 - text_width // 2
-        text_y = 256 - text_height // 2
-        draw.text((text_x, text_y), "BA", font=font_large, fill=(42, 42, 45))
+        text_y = 200 - text_height // 2
+        draw.text((text_x, text_y), "BSOD Analyzer", font=font_title, fill=(240, 240, 240))
         
-        # Draw purple underline
-        draw.rectangle([(150, 340), (362, 350)], fill=(124, 58, 237))
+        # Draw separator line in purple
+        draw.rectangle([(100, 270), (412, 272)], fill=(124, 58, 237))
         
-        # Draw "ANALYZER" text below
-        text_bbox = draw.textbbox((0, 0), "ANALYZER", font=font_small)
+        # Draw "Windows Diagnostic Tool" subtitle
+        text_bbox = draw.textbbox((0, 0), "Windows Diagnostic Tool", font=font_subtitle)
         text_width = text_bbox[2] - text_bbox[0]
         text_x = 256 - text_width // 2
-        draw.text((text_x, 370), "ANALYZER", font=font_small, fill=(200, 200, 200))
+        draw.text((text_x, 310), "Windows Diagnostic Tool", font=font_subtitle, fill=(180, 180, 180))
+        
+        # Draw version indicator
+        text_bbox = draw.textbbox((0, 0), "v0.9.2", font=font_subtitle)
+        text_width = text_bbox[2] - text_bbox[0]
+        text_x = 256 - text_width // 2
+        draw.text((text_x, 410), "v0.9.2", font=font_subtitle, fill=(124, 58, 237))
         
         # Save as PNG for GUI
         gui_img.save(Path(__file__).parent / "logo.png")
         print("[PASS] GUI logo created: logo.png (512x512)")
         
-        # Create ICO for taskbar (256x256, then resize to 32x32 for actual ico)
+        # Create ICO for taskbar (professional badge style)
         ico_sizes = [(32, 32), (64, 64), (128, 128)]
         ico_images = []
         
@@ -64,27 +67,19 @@ def generate_with_pil():
             ico_img = Image.new('RGBA', size, color=(255, 255, 255, 0))
             draw_ico = ImageDraw.Draw(ico_img)
             
-            # Dark grey background with gradient
-            for y in range(size[1]):
-                intensity = int(42 + (y / size[1]) * 30)
-                draw_ico.rectangle([(0, y), (size[0], y+1)], fill=(intensity, intensity, intensity))
+            # Dark grey background
+            draw_ico.rectangle([(0, 0), (size[0], size[1])], fill=(42, 42, 45))
             
-            # Purple circle (top right)
-            circle_offset = int(size[0] * 0.7)
-            circle_size = int(size[0] * 0.35)
-            draw_ico.ellipse(
-                [(circle_offset - circle_size//2, 5), (circle_offset + circle_size//2, 5 + circle_size)],
-                fill=(124, 58, 237, 200),
-                outline=(124, 58, 237, 255),
-                width=1
-            )
+            # Purple accent bar on left
+            bar_width = max(1, size[0] // 10)
+            draw_ico.rectangle([(0, 0), (bar_width, size[1])], fill=(124, 58, 237))
             
-            # White circle (center)
-            margin = int(size[0] * 0.15)
-            draw_ico.ellipse(
-                [(margin, margin), (size[0] - margin, size[1] - margin)],
+            # White square (badge background)
+            padding = max(1, size[0] // 8)
+            draw_ico.rectangle(
+                [(padding, padding), (size[0] - padding, size[1] - padding)],
                 fill=(240, 240, 240),
-                outline=(200, 200, 200),
+                outline=(180, 180, 180),
                 width=1
             )
             
