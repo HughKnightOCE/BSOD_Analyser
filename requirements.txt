@@ -1,0 +1,13 @@
+# Core dependencies (minimal - most come with Python)
+# Tkinter is included with Python
+# No external dependencies required for core functionality!
+
+# Optional: For matplotlib timeline charts
+matplotlib>=3.5.0
+
+# Development/Building
+pyinstaller>=5.10
+setuptools>=45
+wheel>=0.37
+build>=0.10
+twine>=4.0

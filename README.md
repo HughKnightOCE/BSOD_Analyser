@@ -27,6 +27,20 @@ BSOD Analyzer is a comprehensive Windows diagnostic tool that:
 
 ## Installation
 
+### ⚡ Quick Start: Standalone Executable (Recommended)
+
+**Download [BSOD_Analyzer.exe](https://github.com/HughKnightOCE/BSOD_Analyser/releases)** — No installation needed!
+
+```powershell
+# Run directly
+.\BSOD_Analyzer.exe
+
+# Or use admin launcher
+.\BSOD_Analyzer_Admin.bat
+```
+
+See [EXECUTABLE_DISTRIBUTION.md](EXECUTABLE_DISTRIBUTION.md) for details.
+
 ### Option 1: From Source (Development)
 
 1. Clone or download the repository
@@ -35,22 +49,30 @@ BSOD Analyzer is a comprehensive Windows diagnostic tool that:
    python -m venv .venv
    .\.venv\Scripts\Activate.ps1
    ```
-3. Install in editable mode:
+3. Install dependencies:
    ```powershell
-   pip install -e .
+   pip install -r requirements.txt
    ```
 4. Run the GUI:
    ```powershell
    python bsod_ui.py
    ```
 
-### Option 2: Build Distribution (Wheel)
+### Option 2: Build Distribution (Wheel/Source)
 
 ```powershell
 python -m pip install build
 python -m build
-# Wheel will be in dist/
+# Distributions in dist/
 pip install dist/bsod_analyzer-0.9.1-py3-none-any.whl
+```
+
+### Option 3: Build Your Own Executable
+
+```powershell
+pip install pyinstaller
+pyinstaller --onefile --windowed --name BSOD_Analyzer bsod_ui.py
+# Output: dist\BSOD_Analyzer.exe
 ```
 
 ## Usage
