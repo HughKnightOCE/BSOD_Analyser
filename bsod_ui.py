@@ -395,6 +395,7 @@ def run_elevated():
     ps = f'Start-Process "{py}" -ArgumentList \'"{script}"\' -Verb RunAs'
     try:
         bsod_core.run_powershell(ps)
+        root.after(500, root.destroy)  # Close the non-elevated instance after launching admin version
     except Exception as e:
         messagebox.showerror("Error", f"Could not relaunch elevated.\n\n{e}")
 
